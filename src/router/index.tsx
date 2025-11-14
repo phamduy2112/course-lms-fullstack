@@ -10,6 +10,8 @@ import CourseDetail from "@/pages/client/course-detail/course-detail";
 import Courses from "@/pages/client/courses/courses";
 import Home from "@/pages/client/Home";
 import LearningPage from "@/pages/client/user-courses/learning/Learning";
+import UserProfileSettings from "@/pages/client/user-courses/setting/user-setting";
+import UserDetail from "@/pages/client/user-courses/user-detail";
 import VideoDetail from "@/pages/client/video-detail/video-detail";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -24,6 +26,8 @@ export const router=createBrowserRouter([
            
             {path:"/course-detail",element:<CourseDetail/>},
             {path:"/cart",element:<CartPage/>},
+            {path:"/user/detail",element:<UserDetail/>},
+            {path:"/user/detail/setting",element:<UserProfileSettings/>},
             {path:"/my-courses/learning",element:<LearningPage/>}
         ],
         
