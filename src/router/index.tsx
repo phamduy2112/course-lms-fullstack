@@ -3,6 +3,8 @@ import ClientLayout from "@/layout/client/ClientLayout";
 import AdminCourses from "@/pages/admin/course/admin-courses";
 import CreateCoursePage from "@/pages/admin/course/create/create-course";
 import Edit from "@/pages/admin/course/edit/edit";
+import { Login } from "@/pages/client/auth/login";
+import { VerifyOtp } from "@/pages/client/auth/verify-otp";
 import CartPage from "@/pages/client/cart/cart";
 import CourseDetail from "@/pages/client/course-detail/course-detail";
 import Courses from "@/pages/client/courses/courses";
@@ -19,12 +21,16 @@ export const router=createBrowserRouter([
         children:[
             { index: true, element: <Home /> },
             {path:"/courses",element:<Courses/>},
+           
             {path:"/course-detail",element:<CourseDetail/>},
             {path:"/cart",element:<CartPage/>},
             {path:"/my-courses/learning",element:<LearningPage/>}
         ],
         
-    },{
+    },
+     {path:"/login",element:<Login/>},
+     {path:"/verity-otp",element:<VerifyOtp/>},
+    {
         path:"/video/detail",
         element:<VideoDetail/>
     },

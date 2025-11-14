@@ -54,7 +54,7 @@ const CreateCoursePage = () => {
   const form=useForm<any>({
     resolver:zodResolver(courseSchema),
     defaultValues:{
-         title: "",
+    title: "",
   description: "",
   fileKey:"",
   price:"",
@@ -71,7 +71,7 @@ const CreateCoursePage = () => {
   return (
     <div>
         <div className='flex items-center gap-4'>
-            <Link
+          <Link
             to="/admin/courses"
             className={buttonVariants({variant:"outline",size:"icon"})}
             ><ArrowLeft className='size-4'></ArrowLeft></Link>
