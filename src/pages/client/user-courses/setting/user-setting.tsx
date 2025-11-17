@@ -7,7 +7,8 @@ import UserProfileTabs from "./user-tabs";
 const UserProfileSettings: React.FC = () => {
 
   return (
-    <div className="min-h-screen bg-white py-6  px-6">
+    <div className="min-h-screen bg-white py-6  px-6
+    ">
       <div className="max-w-5xl mx-auto">
         <UserProfileTabs/>
      
