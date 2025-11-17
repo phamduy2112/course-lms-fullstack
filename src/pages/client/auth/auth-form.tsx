@@ -11,6 +11,8 @@ interface AuthFormProps {
 export const AuthForm: React.FC<AuthFormProps> = ({ type, onSubmit }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name,setName]=useState("")
+  const [confirmPassword,setConfirmPassword]=useState("")
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

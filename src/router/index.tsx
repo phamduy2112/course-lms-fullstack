@@ -4,6 +4,7 @@ import AdminCourses from "@/pages/admin/course/admin-courses";
 import CreateCoursePage from "@/pages/admin/course/create/create-course";
 import Edit from "@/pages/admin/course/edit/edit";
 import { Login } from "@/pages/client/auth/login";
+import { Register } from "@/pages/client/auth/register";
 import { VerifyOtp } from "@/pages/client/auth/verify-otp";
 import CartPage from "@/pages/client/cart/cart";
 import CourseDetail from "@/pages/client/course-detail/course-detail";
@@ -33,6 +34,7 @@ export const router=createBrowserRouter([
         
     },
      {path:"/login",element:<Login/>},
+     {path:"/register",element:<Register/>},
      {path:"/verity-otp",element:<VerifyOtp/>},
     {
         path:"/video/detail",
