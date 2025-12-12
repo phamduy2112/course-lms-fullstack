@@ -18,13 +18,14 @@ interface CourseSliderProps {
   }[];
 }
 
-export default function CourseSlider({ courses }: CourseSliderProps) {
+export default function CourseSlider({courses}:any) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     align: "start",
     containScroll: "trimSnaps",
   });
-
+  console.log(courses)
+  
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
 
@@ -45,7 +46,7 @@ export default function CourseSlider({ courses }: CourseSliderProps) {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="relative">
+    <div className="relative mx-auto">
       {/* Nút trái */}
       {canScrollPrev && (
         <button

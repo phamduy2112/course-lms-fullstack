@@ -1,37 +1,62 @@
 // src/pages/UserDetail.tsx
-import React from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { useAppDispatch } from "@/store/hooks";
+import { getUserDetail } from "@/store/thunks/user-thunks";
+import { Progress } from "@radix-ui/react-progress";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { DialogUserMore } from "./component/dialog-user-more";
+import { useCourseOfUserQuery } from "@/hooks/query/use-course";
+import { courses } from "@/data/MockApi";
 
 const UserDetail: React.FC = () => {
-  const courses = [
-    { name: "React Mastery", status: "Đang học", progress: 65 },
-    { name: "TypeScript Advanced", status: "Hoàn thành", progress: 100 },
-    { name: "UI/UX Design", status: "Đang học", progress: 45 },
-  ];
-
+  
+  // const courses = [
+  //   { name: "React Mastery", status: "Đang học", progress: 65 },
+  //   { name: "TypeScript Advanced", status: "Hoàn thành", progress: 100 },
+  //   { name: "UI/UX Design", status: "Đang học", progress: 45 },
+  // ];
+    const dispatch = useAppDispatch();
+  
+    useEffect(() => {
+      dispatch(getUserDetail());
+    }, [dispatch]);
+  const userState = useSelector((state) => state.user.user);
+  const user=userState?.data
+  const { data:courses, isLoading } = useCourseOfUserQuery();
+  if (isLoading) return <p>Loading...</p>;
+ console.log(courses)
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-white p-6">
-      <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-2xl overflow-hidden">
+    <div className=" to-white p-6">
+      <div className=" container mx-auto">
         {/* Header Cover */}
-        <div className="relative h-40 bg-gradient-to-r from-indigo-600 to-purple-600">
-          <img
-            src="https://i.pravatar.cc/120"
-            alt="User Avatar"
-            className="absolute left-8 bottom-[-48px] w-28 h-28 rounded-full border-4 border-white shadow-lg"
-          />
-        </div>
 
-        <div className="pt-20 px-8 pb-10">
+
+        <div className=" px-8 pb-10  ">
           {/* User Info */}
-          <div className="flex justify-between items-start flex-wrap">
-            <div>
+          <Avatar className="size-40 relative top-12">
+            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          <div className="
+          bg-white shadow-lg pt-14 px-9 pb-7 rounded-2xl overflow-hidden
+          flex justify-between items-start flex-wrap">
+
+            <div className="">
+
               <h1 className="text-2xl font-bold text-gray-800">
-                Nguyễn Văn A
+                {user?.name}
               </h1>
-              <p className="text-gray-500">Học viên • nguyenvana@example.com</p>
+              <p className="text-gray-500">{user?.role} • Tim hieu  
+
+                            <DialogUserMore user={user}/>
+
+              </p>
             </div>
-            <button className="px-5 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+            <Button className="px-5 py-2 rounded-lg ">
               Chỉnh sửa hồ sơ
-            </button>
+            </Button>
           </div>
 
           {/* Stats */}
@@ -63,22 +88,19 @@ const UserDetail: React.FC = () => {
                   className="p-5 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition flex justify-between items-center"
                 >
                   <div>
-                    <p className="font-medium text-gray-800">{course.name}</p>
+                    <p className="font-medium text-gray-800">{course?.courses?.title}</p>
                     <div className="w-40 bg-gray-200 h-2 rounded-full mt-2">
-                      <div
-                        className="bg-indigo-600 h-2 rounded-full"
-                        style={{ width: `${course.progress}%` }}
-                      ></div>
+                   <Progress value={33} />
+
                     </div>
                   </div>
                   <span
-                    className={`text-sm font-semibold ${
-                      course.status === "Hoàn thành"
+                    className={`text-sm font-semibold ${course.status === "Hoàn thành"
                         ? "text-green-600"
                         : "text-indigo-600"
-                    }`}
+                      }`}
                   >
-                    {course.status}
+                    Hoan thanh
                   </span>
                 </div>
               ))}

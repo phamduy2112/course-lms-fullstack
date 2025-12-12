@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import { useAppDispatch } from "@/store/hooks";
+import { getUserDetail, updateUser } from "@/store/thunks/user-thunks";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const UserForm = () => {
      const [formData, setFormData] = useState({
     firstName: "",
-    lastName: "",
     headline: "",
     bio: "",
     language: "Tiếng Việt",
@@ -15,18 +17,54 @@ const UserForm = () => {
     x: "",
     youtube: "",
   });
+  const dispatch = useAppDispatch();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  
   };
+  const handleSubmit=async (e)=>{
+  e.preventDefault(); // ngăn reload trang
+  const payload={
+    name:formData.firstName,
+    bio:formData.bio,
 
+  }
+     const resultAction = await dispatch(updateUser(payload));
+     
+
+  }
+
+
+  useEffect(() => {
+    dispatch(getUserDetail());
+  }, [dispatch]);
+  const user = useSelector((state) => state.user.user);
+
+useEffect(() => {
+  if (user) {
+    setFormData({
+      firstName: user.data.name || "",
+      headline: user.headline || "",
+      bio: user.bio || "",
+      language: user.language || "Tiếng Việt",
+      website: user.website || "",
+      facebook: user.facebook || "",
+      instagram: user.instagram || "",
+      linkedin: user.linkedin || "",
+      tiktok: user.tiktok || "",
+      x: user.x || "",
+      youtube: user.youtube || "",
+    });
+  }
+}, [user]);
   return (
     <div>
           {/* Form */}
-        <div className="space-y-6">
+        <form onSubmit={handleSubmit}   className="space-y-6">
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <label className="block font-medium mb-1">Tên</label>
@@ -38,16 +76,7 @@ const UserForm = () => {
                 className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-indigo-500"
               />
             </div>
-            <div>
-              <label className="block font-medium mb-1">Họ</label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-              />
-            </div>
+
           </div>
 
           <div>
@@ -127,12 +156,12 @@ const UserForm = () => {
           <div className="pt-6">
             <button
               className="px-6 py-2 bg-indigo-100 text-indigo-400 rounded-md cursor-not-allowed"
-              disabled
+              type="submit"
             >
               Lưu
             </button>
           </div>
-        </div>
+        </form>
     </div>
   )
 }

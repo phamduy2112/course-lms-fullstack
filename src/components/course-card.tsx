@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import LevelUI from "./level-ui";
 
 interface CourseCardProps {
   image: string;
@@ -7,8 +8,8 @@ interface CourseCardProps {
   rating: number;
   reviews: number;
   price: number;
-  oldPrice?: number;
-  tag?: string;
+  discount_price?: number;
+  level?: string;
 }
 
 export default function CourseCard({
@@ -18,15 +19,15 @@ export default function CourseCard({
   rating,
   reviews,
   price,
-  oldPrice,
-  tag,
+  discount_price,
+  level,
 }: CourseCardProps) {
   return (
     <div className="w-[250px] bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer">
       {/* ẢNH */}
       <div className="w-full h-[140px] overflow-hidden">
         <img
-          src={image}
+          src="https://img-c.udemycdn.com/course/240x135/4467252_61d1_3.jpg"
           alt={title}
           className="w-full h-full object-cover"
         />
@@ -38,11 +39,11 @@ export default function CourseCard({
           {title}
         </h3>
 
-        <p className="text-sm text-gray-500">{author}</p>
+        <p className="text-sm text-gray-500">Duy</p>
 
         {/* ĐÁNH GIÁ */}
         <div className="flex items-center text-sm gap-1">
-          <span className="font-semibold text-yellow-600">{rating.toFixed(1)}</span>
+          <span className="font-semibold text-yellow-600">{rating}</span>
           <div className="flex items-center text-yellow-500">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
@@ -51,25 +52,29 @@ export default function CourseCard({
               />
             ))}
           </div>
-          <span className="text-gray-500 ml-1">({reviews})</span>
+          <span className="text-gray-500 ml-1">{reviews || 0}</span>
         </div>
 
         {/* GIÁ */}
         <div className="flex items-center gap-2 text-sm">
           <span className="font-bold text-gray-900">{price.toLocaleString()} đ</span>
-          {oldPrice && (
+          {discount_price && (
             <span className="line-through text-gray-400 text-[13px]">
-              {oldPrice.toLocaleString()} đ
+              {discount_price.toLocaleString()} đ
             </span>
           )}
         </div>
 
         {/* TAG */}
-        {tag && (
+        {/* {tag && (
           <div className="mt-2 inline-block bg-rose-100 text-rose-600 text-xs font-semibold px-2 py-1 rounded">
             {tag}
           </div>
-        )}
+        )} */}
+         {/* <div className="mt-2 inline-block bg-rose-100 text-rose-600 text-xs font-semibold px-2 py-1 rounded">
+            {level}
+          </div> */}
+          <LevelUI level={level}/>
       </div>
     </div>
   );

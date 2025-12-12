@@ -31,12 +31,13 @@ const courseContent: Chapter[] = [
   },
 ];
 
-const Chapter: React.FC = () => {
+const Chapter:any = (chapters:any) => {
+  console.log(chapters)
   return (
     <div className="bg-white py-6 mx-auto">
       <h1 className="text-3xl font-bold mb-6">Nội dung khóa học</h1>
       <Accordion.Root type="multiple" className="">
-        {courseContent.map((chapter, index) => (
+        {chapters?.chapters?.map((chapter, index) => (
           <Accordion.Item key={index} value={`item-${index}`} className="border rounded-md overflow-hidden">
             <Accordion.Header>
               <Accordion.Trigger className="w-full flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200 transition">
@@ -48,13 +49,14 @@ const Chapter: React.FC = () => {
               </Accordion.Trigger>
             </Accordion.Header>
 
-            {chapter.subChapters.length > 0 && (
+            {chapter.lectures.length > 0 && (
               <Accordion.Content className="p-4 bg-white space-y-2">
-                {chapter.subChapters.map((subChapter, idx) => (
-                  <div key={idx} className="text-gray-700">
-                    {subChapter}
-                  </div>
-                ))}
+              {chapter.lectures.map((lecture, idx) => (
+  <div key={idx} className="text-gray-700">
+    {lecture.title}  {/* ✔ render title thay vì object */}
+  </div>
+))}
+
               </Accordion.Content>
             )}
           </Accordion.Item>

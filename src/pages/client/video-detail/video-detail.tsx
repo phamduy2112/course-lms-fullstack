@@ -1,55 +1,97 @@
 import { ChevronDownIcon, ChevronRightIcon } from "lucide-react";
 import React, { useState } from "react";
-import VideoOverview from "./components/video-overview";
+import { useParams } from "react-router-dom";
+import CourseOverview from "./components/video-overview";
 
 const VideoDetail = () => {
-  // dữ liệu demo
+  const { slug, learning } = useParams<{ slug: string; learning: string }>();
+  console.log("Course slug:", slug);
+  console.log("Lesson:", learning);
+
+  // Dữ liệu demo: sections + lessons
   const sections = [
     {
-      title: "Phần 1: Day 1 - Beginner - Working with Variables in Python to Manage Data",
+      title: "Phần 1: Day 1 - Beginner",
       duration: "1 giờ 12 phút",
       lessons: [
-        { name: "1. What you're going to get from this course", time: "3 phút" },
-        { name: "2. START HERE", time: "3 phút" },
-        { name: "3. Downloadable Resources and Tips for Taking the Course", time: "4 phút", resource: true },
-        { name: "4. Day 1 Goals: what we will make by the end of the day", time: "3 phút", checked: true, resource: true },
-        { name: "5. DO NOT SKIP - Download and Setup PyCharm for Learning", time: "2 phút" },
-        { name: "6. Printing to the Console in Python", time: "11 phút", checked: true },
+        {
+          name: "1. Giới thiệu khóa học",
+          type: "document",
+          content: `<h1>Giới thiệu khóa học</h1>
+                    <p>Chào mừng bạn đến với khóa học Python cơ bản.</p>
+                    <ul>
+                      <li>Biến và kiểu dữ liệu</li>
+                      <li>Toán tử cơ bản</li>
+                      <li>Cấu trúc điều kiện và vòng lặp</li>
+                    </ul>`,
+          time: "3 phút",
+        },
+        {
+          name: "2. START HERE",
+          type: "video",
+          video_mux: "abc123",
+          time: "5 phút",
+        },
       ],
     },
     {
-      title: "Phần 2: Day 2 - Beginner - Understanding Data Types and Strings",
+      title: "Phần 2: Day 2 - Beginner",
       duration: "58 phút",
       lessons: [
-        { name: "1. Introduction to Data Types", time: "4 phút" },
-        { name: "2. Working with Strings", time: "6 phút" },
+        {
+          name: "1. Introduction to Data Types",
+          type: "video",
+          video_mux: "def456",
+          time: "4 phút",
+        },
+        {
+          name: "2. Working with Strings",
+          type: "document",
+          content: `<p>Trong bài học này, bạn sẽ học cách thao tác với chuỗi trong Python.</p>`,
+          time: "6 phút",
+        },
       ],
     },
   ];
 
+  // State
   const [openIndex, setOpenIndex] = useState(0);
+  const [currentLesson, setCurrentLesson] = useState(sections[0].lessons[0]);
 
-  const toggleSection = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
+  const toggleSection = (index: number) => {
+    setOpenIndex(openIndex === index ? -1 : index);
+  };
+
+  const handleSelectLesson = (lesson: any) => {
+    setCurrentLesson(lesson);
   };
 
   return (
-    <div className="flex flex-col  min-h-screen">
+    <div className="flex flex-col min-h-screen">
       {/* Header */}
       <header className="bg-gray-900 text-white px-6 py-3 flex justify-between items-center">
         <div className="text-lg font-semibold">Udemy Clone</div>
-        <div className="text-sm">100 Days of Code: Python Pro Bootcamp</div>
+        <div className="text-sm">{slug}</div>
       </header>
 
       {/* Main layout */}
       <div className="flex flex-1">
-        {/* Video area */}
-       <div className="flex-1 ">
-         <div className=" bg-black flex items-center h-[500px] justify-center text-gray-400">
-          <span>🎥 Video Player</span>
+        {/* Main content */}
+        <div className="flex-1 p-4">
+          {currentLesson.type === "video" ? (
+           <>
+            <div className="bg-black flex items-center justify-center h-[500px] text-gray-400">
+              🎥 Video Player - {currentLesson.video_mux}
+            </div>
+            <CourseOverview/>
+           </>
+          ) : (
+            <div
+              className="prose max-w-none"
+              dangerouslySetInnerHTML={{ __html: currentLesson.content }}
+            />
+          )}
         </div>
-        <VideoOverview/>
-       </div>
 
         {/* Sidebar */}
         <aside className="w-96 bg-white border-l overflow-y-auto">
@@ -57,7 +99,7 @@ const VideoDetail = () => {
 
           {sections.map((sec, index) => (
             <div key={index} className="border-b">
-              {/* Phần header */}
+              {/* Section header */}
               <button
                 className="w-full text-left px-4 py-3 flex justify-between items-center hover:bg-gray-50"
                 onClick={() => toggleSection(index)}
@@ -72,13 +114,18 @@ const VideoDetail = () => {
                   <ChevronRightIcon className="w-5 h-5 text-gray-500" />
                 )}
               </button>
-              
 
-              {/* Danh sách bài học */}
+              {/* Lessons list */}
               {openIndex === index && (
                 <div className="bg-gray-50 px-4 py-2 space-y-2">
                   {sec.lessons.map((lesson, i) => (
-                    <div key={i} className="flex items-start justify-between p-2 rounded hover:bg-white">
+                    <div
+                      key={i}
+                      onClick={() => handleSelectLesson(lesson)}
+                      className={`flex items-start justify-between p-2 rounded cursor-pointer hover:bg-white ${
+                        currentLesson === lesson ? "bg-blue-50" : ""
+                      }`}
+                    >
                       <div className="flex items-start space-x-2">
                         <input type="checkbox" checked={lesson.checked || false} readOnly />
                         <div>

@@ -1,8 +1,4 @@
-import AdminLayout from "@/layout/admin/admin-layout";
 import ClientLayout from "@/layout/client/ClientLayout";
-import AdminCourses from "@/pages/admin/course/admin-courses";
-import CreateCoursePage from "@/pages/admin/course/create/create-course";
-import Edit from "@/pages/admin/course/edit/edit";
 import { Login } from "@/pages/client/auth/login";
 import { Register } from "@/pages/client/auth/register";
 import { VerifyOtp } from "@/pages/client/auth/verify-otp";
@@ -17,36 +13,32 @@ import VideoDetail from "@/pages/client/video-detail/video-detail";
 import { createBrowserRouter } from "react-router-dom";
 
 
-export const router=createBrowserRouter([
-    {
-        path:"/",
-        element:<ClientLayout/>,
-        children:[
-            { index: true, element: <Home /> },
-            {path:"/courses",element:<Courses/>},
-           
-            {path:"/course-detail",element:<CourseDetail/>},
-            {path:"/cart",element:<CartPage/>},
-            {path:"/user/detail",element:<UserDetail/>},
-            {path:"/user/detail/setting",element:<UserProfileSettings/>},
-            {path:"/my-courses/learning",element:<LearningPage/>}
-        ],
-        
-    },
-     {path:"/login",element:<Login/>},
-     {path:"/register",element:<Register/>},
-     {path:"/verity-otp",element:<VerifyOtp/>},
-    {
-        path:"/video/detail",
-        element:<VideoDetail/>
-    },
-    {
-        path:"admin",
-        element:<AdminLayout/>,
-        children:[
-            {path:"courses",element:<AdminCourses/>},
-            {path:"courses/create",element:<CreateCoursePage/>},
-            {path:"courses/edit",element:<Edit></Edit>}
-        ]
-    }
-])
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <ClientLayout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "courses", element: <Courses /> },
+      { path: "courses/:slug", element: <CourseDetail /> },
+      { path: "cart", element: <CartPage /> },
+      { path: "user/detail", element: <UserDetail /> },
+      { path: "user/detail/setting", element: <UserProfileSettings /> },
+      { path: "my-courses/learning", element: <LearningPage /> },
+    ],
+  },
+        { path: "course/:slug/:learning", element: <VideoDetail /> },
+
+  { path: "/login", element: <Login /> },
+  { path: "/register", element: <Register /> },
+  { path: "/verify-otp", element: <VerifyOtp /> },
+  // {
+  //   path: "/admin",
+  //   element: <AdminLayout />,
+  //   children: [
+  //     { path: "courses", element: <AdminCourses /> },
+  //     { path: "courses/create", element: <CreateCoursePage /> },
+  //     { path: "courses/edit", element: <Edit /> },
+  //   ],
+  // },
+]);

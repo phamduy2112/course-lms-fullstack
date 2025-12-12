@@ -1,17 +1,20 @@
 import React from 'react';
+import FormAddComment from './form-add-comment';
+import Comment from './comment';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-const CourseProfile = () => {
+const CourseProfile = ({user}:any) => {
+
   return (
     <div className="container bg-white py-4">
       <div className="flex items-center space-x-6">
-        <img
-          src="https://via.placeholder.com/150"
-          alt="Giảng viên"
-          className="w-24 h-24 rounded-full"
-        />
+      <Avatar className="size-24 shrink-0">
+          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
         <div>
           <h2 className="text-2xl font-semibold">Giảng viên</h2>
-          <p className="text-sm text-gray-500">Hỏi Dân IT với Eric</p>
+          <p className="text-sm text-gray-500">{user.name}</p>
           <p className="mt-2 text-gray-700">Ghéth Code và Chỉ Biết Google - "Beyond Your Coding Skills"</p>
         </div>
       </div>
@@ -28,42 +31,7 @@ const CourseProfile = () => {
         <p className="text-sm text-gray-700">Mình tên là Eric, cựu sinh viên CNTT (Software Engineer), trường đại học Bách Khoa Hà Nội, và đang làm nghề freelancer...</p>
       </div>
 
-      <div className="mt-6">
-        <p className="font-semibold">4,8 ⭐ xếp hạng khóa học • 238 xếp hạng</p>
-      </div>
-
-      <div className="mt-6">
-        {/* Dánh giá */}
-        <div className="space-y-4">
-          <div className="flex items-center">
-            <img
-              src="https://via.placeholder.com/40"
-              alt="Hoàng Văn C."
-              className="w-10 h-10 rounded-full"
-            />
-            <div className="ml-4">
-              <p className="font-semibold">Hoàng Văn C.</p>
-              <p className="text-sm text-gray-500">5 tháng trước</p>
-              <p className="mt-2 text-sm">Khóa học dễ hiểu</p>
-            </div>
-          </div>
-
-          <div className="flex items-center">
-            <img
-              src="https://via.placeholder.com/40"
-              alt="Bùi Anh D."
-              className="w-10 h-10 rounded-full"
-            />
-            <div className="ml-4">
-              <p className="font-semibold">Bùi Anh D.</p>
-              <p className="text-sm text-gray-500">5 tháng trước</p>
-              <p className="mt-2 text-sm">Khóa học này đầy đủ kiến thức cơ bản để tiếp cận NestJS</p>
-            </div>
-          </div>
-
-          {/* Add more reviews here */}
-        </div>
-      </div>
+      
     </div>
   );
 };

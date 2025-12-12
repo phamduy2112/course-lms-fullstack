@@ -1,21 +1,16 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
 import Header from './header/header'
 import Footer from './footer/footer'
+import { Outlet } from 'react-router-dom'
 
-const ClientLayout = () => {
-  return (
-
-  <div className=' '>
-  <Header/>
-    <main className="container m-auto">
-        <Outlet />
-      </main>
-      <Footer/>
+const ClientLayout = () => (
+  <div>
+    <Header></Header>
+    <main className="p-4">
+      <Outlet /> {/* Nơi route con render */}
+    </main>
+    <Footer></Footer>
   </div>
-
- 
-  )
-}
+)
 
 export default ClientLayout

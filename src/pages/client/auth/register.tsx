@@ -1,10 +1,13 @@
 import React from "react";
 import { AuthForm } from "./auth-form";
+import type { TRegister } from "@/service/auth/auth.type";
+import { register } from "@/service/auth/auth.service";
 
 export const Register: React.FC = () => {
-  const handleLogin = (data: { email: string; password: string }) => {
-    console.log("Đăng nhập với:", data);
-   
+  const handleLogin = async (data:TRegister) => {
+    const registerUser=await register(data);
+    return registerUser
+
   };
 
   return (

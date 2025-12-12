@@ -9,8 +9,29 @@ import Chapter from "./components/chapter";
 import CourseProfile from "./components/course-profile";
 import CourseCard from "@/components/course-card";
 import ListCourses from "./components/list-course";
+import { useCourseDetailQuery } from "@/hooks/query/use-course";
+import { useCart } from "@/hooks/query/use-cart";
+import CommentDetail from "./comment-detail";
+import { useParams } from "react-router-dom";
 
 const CourseDetail = () => {
+  const { slug } = useParams<{ slug: string }>(); // slug = dynamic part
+  const { data, isLoading, error } = useCourseDetailQuery(slug);
+  const course=data?.data?.data?.course
+    const {  createCart } = useCart();
+
+  const handleAddCart = (course:any) => {
+    const payload={
+        course_id:course.uuid,
+        price:course.price,
+        quantity:1,
+    }
+
+    createCart.mutate(payload);
+  };
+  const courseOfUser=data?.data?.data?.user
+  console.log(course)
+    if(isLoading) return <>Loadiing</>
     return (
         <div className="bg-white min-h-screen p-6">
             <div className="container mx-auto grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8">
@@ -19,7 +40,8 @@ const CourseDetail = () => {
                     <div className="mb-6">
                         <p className="text-sm text-gray-500">Phát triển &gt; Phát triển web &gt; TypeScript</p>
                         <h1 className="text-3xl font-bold mt-2">
-                            Nest.JS Zero - Xây Dựng Backend Node.JS Chuyên Nghiệp
+                                                   {course?.title}
+
                         </h1>
                         <p className="text-lg text-gray-700 mt-2">
                             Tạo Server Backend Restful API Professional với Framework Nest.JS (TypeScript)
@@ -35,7 +57,9 @@ const CourseDetail = () => {
                         </div>
 
                         <p className="text-sm text-gray-500 mt-2">
-                            Được tạo bởi <span className="text-blue-600 hover:underline">Hỏi Dân IT với Eric</span>
+                            Được tạo bởi <span className="text-blue-600 hover:underline">
+                                {courseOfUser?.name}
+                            </span>
                         </p>
 
                         <p className="text-sm text-gray-500 mt-1">
@@ -77,7 +101,7 @@ const CourseDetail = () => {
                             <li>📜 Giấy chứng nhận hoàn thành</li>
                         </ul>
                     </div>
-                    <Chapter />
+                    <Chapter chapters={course.sections}/>
                     <div>
 
 
@@ -106,9 +130,9 @@ const CourseDetail = () => {
                                 <div>Hien them</div>
                             </span>
                         </div>
-                        <CourseProfile/>
+                        <CourseProfile user={courseOfUser}/>
                         {/*  */}
-                       
+                       <CommentDetail course_id={course?.uuid}></CommentDetail>
                         <div>
                             <h2 className="pb-3">Các khóa học khác của Hỏi Dân IT với Eric .</h2>
                             <ListCourses/>
@@ -132,7 +156,9 @@ const CourseDetail = () => {
 
                         <div className="p-5 space-y-4">
                             <p className="text-2xl font-bold">1.349.000 ₫</p>
-                            <Button className="w-full bg-violet-600 hover:bg-violet-700 text-white">
+                            <Button 
+                            onClick={() => handleAddCart(course)} // ✅ dùng arrow function
+                            className="w-full bg-violet-600 hover:bg-violet-700 text-white">
                                 Thêm vào giỏ hàng
                             </Button>
                             <Button variant="outline" className="w-full">

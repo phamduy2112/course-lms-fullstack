@@ -23,7 +23,7 @@ export default function UserProfileTabs() {
             onClick={() => setActiveTab(tab.key)}
             className={`pb-2 ${
               activeTab === tab.key
-                ? "border-b-2 border-indigo-600 text-indigo-600"
+                ? "border-b-2 bg-none border-indigo-600 text-indigo-600"
                 : "hover:text-indigo-600"
             } transition-colors duration-200`}
           >

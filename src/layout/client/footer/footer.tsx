@@ -1,6 +1,8 @@
 import { Globe } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
+
   const sections = [
     {
       title: "Giới thiệu",
