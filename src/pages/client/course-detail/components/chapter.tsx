@@ -32,7 +32,7 @@ const courseContent: Chapter[] = [
 ];
 
 const Chapter:any = (chapters:any) => {
-  console.log(chapters)
+ 
   return (
     <div className="bg-white py-6 mx-auto">
       <h1 className="text-3xl font-bold mb-6">Nội dung khóa học</h1>

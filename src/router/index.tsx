@@ -1,4 +1,8 @@
+import AdminLayout from "@/layout/admin/admin-layout";
 import ClientLayout from "@/layout/client/ClientLayout";
+import AdminDashboard from "@/pages/admin/admin-dashboard";
+import AdminCourses from "@/pages/admin/course/admin-courses";
+import CreateCoursePage from "@/pages/admin/course/create/create-course";
 import { Login } from "@/pages/client/auth/login";
 import { Register } from "@/pages/client/auth/register";
 import { VerifyOtp } from "@/pages/client/auth/verify-otp";
@@ -32,13 +36,14 @@ export const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
   { path: "/verify-otp", element: <VerifyOtp /> },
-  // {
-  //   path: "/admin",
-  //   element: <AdminLayout />,
-  //   children: [
-  //     { path: "courses", element: <AdminCourses /> },
-  //     { path: "courses/create", element: <CreateCoursePage /> },
-  //     { path: "courses/edit", element: <Edit /> },
-  //   ],
-  // },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      { path: "dashboard", element: <AdminDashboard /> },
+      { path: "courses", element: <AdminCourses /> },
+      { path: "courses/create", element: <CreateCoursePage /> },
+      // { path: "courses/edit", element: <Edit /> },
+    ],
+  },
 ]);

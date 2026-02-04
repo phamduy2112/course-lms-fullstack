@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 const emailSchema = z.object({
   email: z.string().email("Email không hợp lệ").nonempty("Vui lòng nhập email"),
@@ -75,6 +76,14 @@ export function EmailFormVerify({ onSubmit }: EmailFormVerifyProps) {
               Gửi mã xác nhận
             </Button>
           </form>
+          <div className="mt-8 pt-3 border-t border-[#2a3150] flex justify-center">
+<a className="group flex items-center justify-center gap-2 text-text-secondary hover:text-white transition-colors text-sm font-bold leading-normal tracking-[0.015em]" href="#">
+<span className="material-symbols-outlined text-[18px] transition-transform group-hover:-translate-x-1">
+  <FaArrowLeftLong />
+</span>
+<span>Back to Login</span>
+</a>
+</div>
         </Form>
       </div>
     </div>

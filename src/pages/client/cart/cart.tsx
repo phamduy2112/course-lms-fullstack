@@ -75,7 +75,7 @@ const CartPage = () => {
 
 
 
-  const cartItem=carts?.cart_items
+  const cartItem=cartItems
   console.log(cartItem)
   return (
     <div className="min-h-screen  py-10">
@@ -91,9 +91,9 @@ const CartPage = () => {
           {/* Danh sách khóa học trong giỏ */}
           <div className="flex-1 bg-white  rounded-lg ">
             <h2 className="text-lg font-semibold mb-4">
-              {cartItem.length} khóa học trong giỏ hàng
+              {cartItems.length} khóa học trong giỏ hàng
             </h2>
-            {cartItem.map((item:any) => (
+            {cartItems.map((item:any) => (
               <div
                 key={item.id}
                 className="flex items-start border-b border-gray-200 pb-4 mb-4"
@@ -104,7 +104,7 @@ const CartPage = () => {
                   className="w-36 h-20 rounded object-cover"
                 />
                 <div className="ml-4 flex-1">
-                  <h3 className="font-semibold text-gray-800">{item?.course.title}</h3>
+                  <h3 className="font-semibold text-gray-800">{item.title}</h3>
                   <p className="text-sm text-gray-500">Bởi {item.author}</p>
                   <div className="flex items-center text-sm text-yellow-600 mt-1">
                     <span className="font-semibold">{item.rating}</span>
@@ -136,13 +136,13 @@ const CartPage = () => {
           </div>
 
           {/* Thanh tóm tắt bên phải */}
-          {/* <div className="w-full lg:w-80 bg-white shadow-md rounded-lg p-6 h-fit">
+          <div className="w-full lg:w-80 bg-white shadow-md rounded-lg p-6 h-fit">
             <h3 className="text-lg font-semibold text-gray-800">Tổng:</h3>
             <p className="text-2xl font-bold text-gray-900 mt-1">
-              {formatVND(279000)}
+              {279000}
             </p>
             <p className="text-sm line-through text-gray-400">
-              {formatVND(779000)}
+              {779000}
             </p>
             <p className="text-green-600 text-sm font-medium mb-4">
               Giảm 64%
@@ -160,7 +160,7 @@ const CartPage = () => {
             <button className="w-full border border-purple-600 text-purple-700 py-2 rounded-md hover:bg-purple-50">
               Áp dụng coupon
             </button>
-          </div> */}
+          </div>
           
         </div>
 

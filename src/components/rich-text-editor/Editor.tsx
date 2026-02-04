@@ -20,7 +20,7 @@ const editor=useEditor({
 
 })
   return (
-    <div className='w-full border border-input rounded-lg overflow-hidden'>
+    <div className='w-full border border-input glass-card text-white rounded-lg overflow-hidden'>
         <Menubar editor={editor}/>
         <EditorContent editor={editor}></EditorContent>
     </div>

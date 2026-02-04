@@ -14,6 +14,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Link } from 'react-router-dom'
 import RichTextEditor from '@/components/rich-text-editor/Editor'
 import Uploader from '@/components/file-uploader/Uploader'
+import { MdDeleteOutline } from 'react-icons/md'
+import CreateChapter from './create-chapter'
 type CourseFormData = {
   title: string
   description: string
@@ -41,7 +43,7 @@ const courseSchema = z.object({
 
 type FormData = z.infer<typeof courseSchema>
  const courseCategories=[
-    "Developmen",
+    "Development",
     "Busincess",
     "Finance",
     "IT & Software"
@@ -69,24 +71,27 @@ const CreateCoursePage = () => {
     console.log(values)
   }
   return (
-    <div>
-        <div className='flex items-center gap-4'>
+    <div className=''>
+        {/* <div className='flex items-center gap-4 '>
           <Link
             to="/admin/courses"
             className={buttonVariants({variant:"outline",size:"icon"})}
             ><ArrowLeft className='size-4'></ArrowLeft></Link>
             <h1 className='text-2xl font-bold'>Create Courses</h1>
-        </div>
-        <Card>
-            <CardHeader>
-                <CardTitle>Basic Information</CardTitle>
-                <CardDescription>Provide basic information about the course</CardDescription>
-            </CardHeader>
+        </div> */}
+        {/* <Card className='bg-transparent border-none mt-4 text-white'>
+         
             <CardContent>
 
  <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-       <FormField 
+        
+       <div className='glass-card p-4 space-y-4'>  
+        <div className="flex flex-col gap-2">
+                <CardTitle>Basic Information</CardTitle>
+                <CardDescription>Provide basic information about the course</CardDescription>
+            </div>
+           <FormField 
        control={form.control}
        name="title"
        render={({field})=>(
@@ -114,7 +119,7 @@ const CreateCoursePage = () => {
        )}
        />
        
-       <Button type='button' className='w-fit' onClick={()=>{
+       <Button type='button' className='w-fit text-white' onClick={()=>{
         const titleValue=form.getValues("title");
         const slug=slugify(titleValue)
         form.setValue("slug",slug,{shouldValidate:true})
@@ -145,34 +150,24 @@ const CreateCoursePage = () => {
         <FormItem className='w-full'>
             <FormLabel>Description</FormLabel>
             <FormControl>
-             <RichTextEditor/>
+             <RichTextEditor />
             </FormControl>
             <FormMessage></FormMessage>
         </FormItem>
        )}
        />
-             <FormField 
-       control={form.control}
-       name="fileKey"
-       render={({field})=>(
-        <FormItem className='w-full'>
-            <FormLabel>Thumbnail image</FormLabel>
-            <FormControl>
-               <Uploader/>
-            </FormControl>
-            <FormMessage></FormMessage>
-        </FormItem>
-       )}
-       />
-
-       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+       
+       </div>
+    
+       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 glass-card p-4'>
         <FormField
   control={form.control}
   name="category"
+       
   render={({ field }) => (
     <FormItem className="w-full">
       <FormLabel>Category</FormLabel>
-      <Select onValueChange={field.onChange} value={field.value}>
+      <Select onValueChange={field.onChange} value={field.value}  >
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Select Category" />
         </SelectTrigger>
@@ -211,7 +206,29 @@ const CreateCoursePage = () => {
     </FormItem>
   )}
 />
-
+<FormField
+  control={form.control}
+  name="level"
+  render={({ field }) => (
+    <FormItem className="w-full">
+      <FormLabel>Status</FormLabel>
+      <Select onValueChange={field.onChange} value={field.value}>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder="Select Level" 
+          />
+        </SelectTrigger>
+        <SelectContent>
+          {courseLevels.map((level) => (
+            <SelectItem key={level} value={level}>
+              {level}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
      <FormField
   control={form.control}
   name="duration"
@@ -238,37 +255,39 @@ const CreateCoursePage = () => {
     </FormItem>
   )}
 />
+
        </div>
-        <FormField
-  control={form.control}
-  name="level"
-  render={({ field }) => (
-    <FormItem className="w-full">
-      <FormLabel>Status</FormLabel>
-      <Select onValueChange={field.onChange} value={field.value}>
-        <SelectTrigger className="w-full">
-          <SelectValue placeholder="Select Level" 
-          />
-        </SelectTrigger>
-        <SelectContent>
-          {courseLevels.map((level) => (
-            <SelectItem key={level} value={level}>
-              {level}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      <FormMessage />
-    </FormItem>
-  )}
-/>
+<div className="glass-card p-4 space-y-4">
+  
+             <FormField 
+       control={form.control}
+       name="fileKey"
+       render={({field})=>(
+        <FormItem className='w-full'>
+            <FormLabel>Thumbnail image</FormLabel>
+            <FormControl className="">
+               <Uploader/>
+            </FormControl>
+            <FormMessage></FormMessage>
+        </FormItem>
+       )}
+       />
 
-<Button>Create Course <PlusIcon className='ml-1' size={16}/></Button>
+</div>
 
+<div className='flex justify-end space-x-2'>
+  <Button className='text-white'
+    variant={"destructive"}
+  > <MdDeleteOutline /> Detele</Button>
+
+<Button className='text-white bg-blue-700 hover:bg-blue-800'>Create & Continue <PlusIcon className='ml-1' size={16}/></Button>
+
+</div>
       </form>
     </Form>
             </CardContent>
-        </Card>
+        </Card> */}
+        <CreateChapter/>
     </div>
   )
 }

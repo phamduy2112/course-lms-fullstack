@@ -75,12 +75,12 @@ const Uploader = () => {
 
   return (
       <Card
-      className={cn("relative border-2 border-dashed transition-colors duration-200 ease-in-out w-full h-64",
+      className={cn("relative border-2 glass-card text-white border-dashed transition-colors duration-200 ease-in-out w-full h-64",
         isDragActive?"border-primary bg-primary/10 border-solid":"border-border hover:border-primary"
       )}
       {...getRootProps()}>
      
-      <CardContent className='flex items-center justify-center h-full w-full p-4'>
+      <CardContent className='flex items-center justify-center text-white h-full w-full p-4'>
         <input {...getInputProps()} />
       {/* {
         isDragActive ?

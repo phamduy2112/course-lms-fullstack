@@ -3,10 +3,11 @@ import CareerGoalsSection from './home/component/career-goals-section'
 import CourseSlider from '@/components/course-slider';
 import Banner from './home/component/banner';
 import { useCourseQuery } from '@/hooks/query/use-course';
+import { courses } from '@/data/MockApi';
 
 const Home = () => {
-     const { data, isLoading } = useCourseQuery();
-       if (isLoading) return <p>Loading...</p>;
+    //  const { data, isLoading } = useCourseQuery();
+      //  if (isLoading) return <p>Loading...</p>;
 
   //  console.log(data)
   return (
@@ -16,7 +17,7 @@ const Home = () => {
       <div className='container m-auto'>
         <h1 className='mb-[1rem] text-[2rem] font-bold'>Lĩnh vực sẽ học tiếp theo
 </h1>
-<CourseSlider courses={data.data} />
+<CourseSlider courses={courses} />
 
       </div>
             

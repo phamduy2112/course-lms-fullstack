@@ -5,7 +5,7 @@ import EmailFormVerify from "./emai-form";
 import NewPasswordForm from "./password-form";
 
 export const VerifyOtp: React.FC = () => {
-const [step, setStep] = useState(3);
+const [step, setStep] = useState(1);
 const [email, setEmail] = useState("");
 
 return (
