@@ -107,7 +107,6 @@ useEffect(() => {
             </p>
           </div>
 
-          {/* Social links */}
           <div className="grid md:grid-cols-2 gap-6">
             {[
               { label: "Trang web", name: "website", prefix: "URL" },
@@ -137,7 +136,6 @@ useEffect(() => {
             ))}
           </div>
 
-          {/* Language */}
           <div>
             <label className="block font-medium mb-1">Ngôn ngữ</label>
             <select
@@ -152,7 +150,6 @@ useEffect(() => {
             </select>
           </div>
 
-          {/* Save Button */}
           <div className="pt-6">
             <button
               className="px-6 py-2 bg-indigo-100 text-indigo-400 rounded-md cursor-not-allowed"

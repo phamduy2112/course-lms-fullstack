@@ -22,11 +22,16 @@ const UserDetail: React.FC = () => {
     useEffect(() => {
       dispatch(getUserDetail());
     }, [dispatch]);
-  const userState = useSelector((state) => state.user.user);
-  const user=userState?.data
-  const { data:courses, isLoading } = useCourseOfUserQuery();
-  if (isLoading) return <p>Loading...</p>;
- console.log(courses)
+  // const userState = useSelector((state) => state.user.user);
+  // const user=userState?.data
+  // const { data:courses, isLoading } = useCourseOfUserQuery();
+  // if (isLoading) return <p>Loading...</p>;
+//  console.log(courses)
+const user={
+  name: "Nguyen Van A",
+  email: "",
+  role:" Học viên"
+}
   return (
     <div className=" to-white p-6">
       <div className=" container mx-auto">
@@ -79,7 +84,7 @@ const UserDetail: React.FC = () => {
           </div>
 
           {/* Courses */}
-          <div className="mt-10">
+          {/* <div className="mt-10">
             <h2 className="text-xl font-semibold mb-4">Khóa học của bạn</h2>
             <div className="space-y-4">
               {courses.map((course, idx) => (
@@ -105,7 +110,7 @@ const UserDetail: React.FC = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

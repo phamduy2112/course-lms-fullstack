@@ -30,26 +30,10 @@ export default function UserProfileTabs() {
             {tab.label}
           </button>
         ))}
+        
       </div>
 
-      {/* Tab content with fade */}
-      <div className="relative min-h-[100px]">
-        {tabs.map((tab) => (
-          <Transition
-            as={Fragment}
-            key={tab.key}
-            show={activeTab === tab.key}
-            enter="transition-opacity duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transition-opacity duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="absolute inset-0">{tab.content}</div>
-          </Transition>
-        ))}
-      </div>
+   
     </div>
   );
 }

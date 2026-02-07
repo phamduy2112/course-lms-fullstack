@@ -7,6 +7,8 @@ import { Login } from "@/pages/client/auth/login";
 import { Register } from "@/pages/client/auth/register";
 import { VerifyOtp } from "@/pages/client/auth/verify-otp";
 import CartPage from "@/pages/client/cart/cart";
+import CheckoutPage from "@/pages/client/check-out/check-out";
+import OrderConfirmedPage from "@/pages/client/check-out/success/order-confirm";
 import CourseDetail from "@/pages/client/course-detail/course-detail";
 import Courses from "@/pages/client/courses/courses";
 import Home from "@/pages/client/Home";
@@ -14,6 +16,7 @@ import LearningPage from "@/pages/client/user-courses/learning/Learning";
 import UserProfileSettings from "@/pages/client/user-courses/setting/user-setting";
 import UserDetail from "@/pages/client/user-courses/user-detail";
 import VideoDetail from "@/pages/client/video-detail/video-detail";
+import { CategoryCMS } from "@/pages/cms/category/category-cms";
 import { createBrowserRouter } from "react-router-dom";
 
 
@@ -29,6 +32,8 @@ export const router = createBrowserRouter([
       { path: "user/detail", element: <UserDetail /> },
       { path: "user/detail/setting", element: <UserProfileSettings /> },
       { path: "my-courses/learning", element: <LearningPage /> },
+      { path: "checkout", element: <CheckoutPage /> },
+      { path: "order-confirmed", element: <OrderConfirmedPage /> },
     ],
   },
         { path: "course/:slug/:learning", element: <VideoDetail /> },
@@ -43,6 +48,7 @@ export const router = createBrowserRouter([
       { path: "dashboard", element: <AdminDashboard /> },
       { path: "courses", element: <AdminCourses /> },
       { path: "courses/create", element: <CreateCoursePage /> },
+      { path: "category", element: <CategoryCMS /> },
       // { path: "courses/edit", element: <Edit /> },
     ],
   },
