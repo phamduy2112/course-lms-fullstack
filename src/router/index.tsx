@@ -17,6 +17,12 @@ import UserProfileSettings from "@/pages/client/user-courses/setting/user-settin
 import UserDetail from "@/pages/client/user-courses/user-detail";
 import VideoDetail from "@/pages/client/video-detail/video-detail";
 import { CategoryCMS } from "@/pages/cms/category/category-cms";
+import CategoryDashboard from "@/pages/cms/category/category-dashboard";
+import InstructorApplicantReview from "@/pages/cms/instructor/appli-review";
+import InstructorProfilePage from "@/pages/cms/instructor/detail/instructor-detail";
+import InstructorManagementPage from "@/pages/cms/instructor/instructor-management";
+import RolesPermissionsPage from "@/pages/cms/permission/permission-role";
+import UserAccessManagement from "@/pages/cms/permission/user-access-managenment";
 import { createBrowserRouter } from "react-router-dom";
 
 
@@ -48,7 +54,12 @@ export const router = createBrowserRouter([
       { path: "dashboard", element: <AdminDashboard /> },
       { path: "courses", element: <AdminCourses /> },
       { path: "courses/create", element: <CreateCoursePage /> },
+      { path: "category/dashboard", element: <CategoryDashboard /> },
       { path: "category", element: <CategoryCMS /> },
+      { path: "instructors", element: <InstructorManagementPage /> },
+      { path: "instructors/:name", element: <InstructorProfilePage /> },
+      { path: "instructors/apply/:name", element: <InstructorApplicantReview /> },
+      { path: "permissions&role", element: <UserAccessManagement /> },
       // { path: "courses/edit", element: <Edit /> },
     ],
   },
